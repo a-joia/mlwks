@@ -1,4 +1,5 @@
 dataloader:
+  name: MyCsvDataloader
   class: shared.dataloaders.my_csv_dataloader.MyCsvDataloader
   params: 
     filepath:  example\sample.csv
@@ -12,17 +13,40 @@ dataloader:
 #     params: {}
 
 model:
+  name: MeanScoreModel
   class: shared.models.mean_score_model.MeanScoreModel
+  dataloader: MyCsvDataloader
   dataloader_args: 
     split: train
     batch_size: 32
     shuffle: true
   params: {}
   save_to : ""
-  
 
 evaluator:
+  name: PrintEvaluator
   class: shared.evaluators.print_evaluator.PrintEvaluator
   params: {} 
   save_to: ""
-  
+
+
+stage:
+  train:
+    model: MeanScoreModel
+    dataloader: MyCsvDataloader
+    dataloader_args: 
+      split: train
+      batch_size: 32
+      shuffle: true
+    evaluator: 
+        name: PrintEvaluator
+        evaluator_args: {}
+
+  eval:
+    model: MeanScoreModel
+    dataloader: MyCsvDataloader
+    dataloader_args: 
+      split: test
+    evaluator: 
+      name: PrintEvaluator
+      evaluator_args: {}
