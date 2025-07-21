@@ -9,44 +9,50 @@ dataloader:
 # preprocessors:
 #   - class: shared.preprocessors.uppercase_name_preprocessor.UppercaseNamePreprocessor
 #     params: {}
+#     name: UppercaseNamePreprocessor
 #   - class: shared.preprocessors.double_score_preprocessor.DoubleScorePreprocessor
 #     params: {}
+#     name: DoubleScorePreprocessor
 
 model:
   name: MeanScoreModel
   class: shared.models.mean_score_model.MeanScoreModel
   dataloader: MyCsvDataloader
-  dataloader_args: 
-    split: train
-    batch_size: 32
-    shuffle: true
   params: {}
-  save_to : ""
+  save_to : ""  # Optional, if you want to save the model after training
+  load_from: "" # Optional, if you want to load a pre-trained model
 
 evaluator:
   name: PrintEvaluator
   class: shared.evaluators.print_evaluator.PrintEvaluator
   params: {} 
   save_to: ""
+  
 
-
+# possible stages: 
+#   - train
+#   - eval
 stage:
-  train:
+  train: # is gonna call the train method of the model
     model: MeanScoreModel
     dataloader: MyCsvDataloader
+    preprocessors: []
     dataloader_args: 
       split: train
       batch_size: 32
       shuffle: true
+    model_args: {}
     evaluator: 
         name: PrintEvaluator
         evaluator_args: {}
 
-  eval:
+  eval: # is gonna call the eval method of the model
     model: MeanScoreModel
     dataloader: MyCsvDataloader
+    preprocessors: []
     dataloader_args: 
-      split: test
+      split: eval
+    model_args: {}
     evaluator: 
       name: PrintEvaluator
       evaluator_args: {}
