@@ -1,0 +1,16 @@
+services:
+  ml_orchestrator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ml_orchestrator
+    # command: >
+    #   --generate-schemas --run-pipeline --config /app/pipelines/test_pipeline/example_config.yml
+    volumes:
+      - ./pipelines:/app/pipelines
+      - ./outputs:/app/outputs
+      - ${USERPROFILE}/.azure:/root/.azure
+      - ./shared:/app/shared
+      - ./example/sample.csv:/app/example/sample.csv
+    # To run a different config, override the command:
+    # docker compose run --rm ml_orchestrator --generate-schemas --run-pipeline --config /app/pipelines/test_pipeline/test_config_7.yml 

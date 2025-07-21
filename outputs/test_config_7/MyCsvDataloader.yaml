@@ -1,0 +1,5 @@
+MyCsvDataloader:
+  columns:
+    ' hello2': int
+    hello: int
+  type: dataframe

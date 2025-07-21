@@ -1,0 +1,17 @@
+dataloader:
+  class: shared.dataloaders.my_csv_dataloader.MyCsvDataloader
+  params: {}
+  output_schema: outputs/test1/MyDataloaderOutput.yaml
+preprocessors:
+  - class: shared.preprocessors.double_score_preprocessor.DoubleScorePreprocessor
+    params: {}
+    # output_schema: outputs/test1/MyPreprocessorOutput.yaml
+model:
+  class: shared.models.mean_score_model.MeanScoreModel
+  split: train
+  dataloader_args: {}
+  params: {}
+  # output_schema: outputs/test1/MyModelOutput.yaml
+evaluator:
+  class: shared.evaluators.print_evaluator.PrintEvaluator
+  params: {} 

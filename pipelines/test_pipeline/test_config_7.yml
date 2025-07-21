@@ -1,0 +1,28 @@
+dataloader:
+  class: shared.dataloaders.my_csv_dataloader.MyCsvDataloader
+  params: 
+    filepath:  example\sample.csv
+  generate_schema: true
+  output_schema: outputs/test_config_7/MyCsvDataloader.yaml
+
+# preprocessors:
+#   - class: shared.preprocessors.uppercase_name_preprocessor.UppercaseNamePreprocessor
+#     params: {}
+#   - class: shared.preprocessors.double_score_preprocessor.DoubleScorePreprocessor
+#     params: {}
+
+model:
+  class: shared.models.mean_score_model.MeanScoreModel
+  dataloader_args: 
+    split: train
+    batch_size: 32
+    shuffle: true
+  params: {}
+  save_to : ""
+  
+
+evaluator:
+  class: shared.evaluators.print_evaluator.PrintEvaluator
+  params: {} 
+  save_to: ""
+  

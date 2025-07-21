@@ -1,0 +1,15 @@
+dataloader:
+  class: shared.dataloaders.my_csv_dataloader.MyCsvDataloader
+  params: {}
+  output_schema: outputs/test8/MyDataloaderOutput.yaml
+preprocessors:
+  - class: shared.preprocessors.score_to_letter_preprocessor.ScoreToLetterPreprocessor
+    params: {}
+model:
+  class: shared.models.grade_count_model.GradeCountModel
+  split: train
+  dataloader_args: {}
+  params: {}
+evaluator:
+  class: shared.evaluators.print_evaluator.PrintEvaluator
+  params: {} 

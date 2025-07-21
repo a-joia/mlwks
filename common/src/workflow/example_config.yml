@@ -1,0 +1,18 @@
+dataloader:
+  class: common.src.workflow.pipeline.MyDataloader
+  params: {}
+  output_schema: MyDataloaderOutput.yaml
+preprocessors:
+  - class: common.src.workflow.pipeline.MyPreprocessor
+    params: {}
+    # output_schema: PreprocessorOutput.yaml
+model:
+  class: common.src.workflow.pipeline.MyModel
+  split: train
+  dataloader_args:
+    custom_arg: 42
+  params: {}
+  # output_schema: ModelOutput.yaml
+evaluator:
+  class: common.src.workflow.pipeline.MyEvaluator
+  params: {} 
